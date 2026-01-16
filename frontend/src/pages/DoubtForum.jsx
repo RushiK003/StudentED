@@ -13,7 +13,7 @@ const DoubtForum = () => {
     const fetchDoubts = async () => {
         try {
             const token = localStorage.getItem('token');
-            const res = await axios.get(`http://localhost:5000/api/doubts/${user.classId}`, {
+            const res = await api.get(`/doubts/${user.classId}`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setDoubts(res.data);
@@ -25,7 +25,7 @@ const DoubtForum = () => {
     const fetchChapters = async () => {
         try {
             const token = localStorage.getItem('token');
-            const res = await axios.get(`http://localhost:5000/api/chapters/${user.classId}`, {
+            const res = await api.get(`/chapters/${user.classId}`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setChapters(res.data);
@@ -48,8 +48,8 @@ const DoubtForum = () => {
         setLoading(true);
         try {
             const token = localStorage.getItem('token');
-            await axios.post('http://localhost:5000/api/doubts', {
-                question,
+            await api.post('/doubts', {
+                question: question,
                 classId: user.classId,
                 chapterId: selectedChapter || null
             }, {

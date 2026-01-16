@@ -35,7 +35,7 @@ const Dashboard = () => {
     const fetchStats = async () => {
         try {
             const token = localStorage.getItem('token');
-            const res = await axios.get('http://localhost:5000/api/student-logs', {
+            const res = await api.get('/student-logs', {
                 headers: { Authorization: `Bearer ${token}` }
             });
             // Transform for Chart.js (Last 7 days)
@@ -52,7 +52,7 @@ const Dashboard = () => {
         setLoadingAdvice(true);
         try {
             const token = localStorage.getItem('token');
-            const res = await axios.post('http://localhost:5000/api/ai/mentor-advice', {}, {
+            const res = await api.post('/ai/mentor-advice', {}, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setMentorAdvice(res.data.advice);

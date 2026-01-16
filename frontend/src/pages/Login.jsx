@@ -22,11 +22,11 @@ const Login = () => {
         if (isRegistering) {
             // Register Logic
             try {
-                await axios.post('http://localhost:5000/api/auth/register', {
+                await api.post('/auth/register', {
                     username,
                     password,
                     role,
-                    classId: role === 'student' ? classId : undefined // Only send classId for students if needed, or both
+                    classId
                 });
                 setSuccessMsg('Registration successful! Please login.');
                 setIsRegistering(false);

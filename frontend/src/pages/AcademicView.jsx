@@ -10,7 +10,8 @@ const AcademicView = () => {
     const fetchChapters = async (classId) => {
         try {
             const token = localStorage.getItem('token');
-            const res = await axios.get(`http://localhost:5000/api/chapters/${classId}`, {
+            // GET chapters
+            const res = await api.get(`/chapters/${classId}`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setChapters(res.data);
@@ -62,9 +63,8 @@ const AcademicView = () => {
                         <div className="flex-1 bg-gray-200 flex flex-col">
                             <div className="p-2 bg-white border-b text-center font-medium">Original PDF Document</div>
                             <iframe
-                                src={`http://localhost:5000${selectedChapter.pdfPath}`}
-                                className="w-full h-full"
-                                title="PDF Viewer"
+                                src={`${BASE_URL}${selectedChapter.pdfPath}`}
+                                className="w-full h-full rounded-lg border border-purple-200" title="PDF Viewer"
                             />
                         </div>
 

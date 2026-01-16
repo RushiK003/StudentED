@@ -26,10 +26,10 @@ const TeacherUpload = () => {
         setUploading(true);
         try {
             const token = localStorage.getItem('token');
-            const res = await axios.post('http://localhost:5000/api/chapters/upload', formData, {
+            const res = await api.post('/chapters/upload', formData, {
                 headers: {
-                    Authorization: `Bearer ${token}`,
-                    'Content-Type': 'multipart/form-data'
+                    'Content-Type': 'multipart/form-data',
+                    Authorization: `Bearer ${token}`
                 }
             });
             setLastUpload(res.data);

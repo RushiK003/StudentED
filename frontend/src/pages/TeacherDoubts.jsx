@@ -14,7 +14,7 @@ const TeacherDoubts = () => {
     const fetchDoubts = async (clsId) => {
         try {
             const token = localStorage.getItem('token');
-            const res = await axios.get(`http://localhost:5000/api/doubts/${clsId}`, {
+            const res = await api.get(`/doubts/${clsId}`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setDoubts(res.data);
@@ -27,7 +27,7 @@ const TeacherDoubts = () => {
         const newAnswer = prompt("Edit Answer (Leave empty to keep current):", currentAnswer);
         try {
             const token = localStorage.getItem('token');
-            await axios.put(`http://localhost:5000/api/doubts/${id}/verify`, {
+            await api.put(`/doubts/${id}/verify`, {
                 isVerified: true,
                 teacherAnswer: newAnswer || undefined
             }, {

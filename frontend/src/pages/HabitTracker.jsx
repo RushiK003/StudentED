@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../api';
 import { useAuth } from '../context/AuthContext';
 
 const HabitTracker = () => {
@@ -12,8 +12,8 @@ const HabitTracker = () => {
     const fetchLogs = async () => {
         try {
             const token = localStorage.getItem('token');
-            const res = await axios.get('http://localhost:5000/api/student-logs', {
-                headers: { Authorization: `Bearer ${token}` }
+            const res = await api.get('/student-logs', {
+                headers: { Authorization: `Bearer ${token} ` }
             });
             setLogs(res.data);
         } catch (err) {
@@ -31,8 +31,8 @@ const HabitTracker = () => {
         e.preventDefault();
         try {
             const token = localStorage.getItem('token');
-            await axios.post('http://localhost:5000/api/student-logs', formData, {
-                headers: { Authorization: `Bearer ${token}` }
+            await api.post('/student-logs', formData, {
+                headers: { Authorization: `Bearer ${token} ` }
             });
             setFormData({ hours: '', mood: '', goals: '', reflection: '' });
             fetchLogs(); // Refresh list
@@ -45,8 +45,8 @@ const HabitTracker = () => {
         setLoading(true);
         try {
             const token = localStorage.getItem('token');
-            const res = await axios.post('http://localhost:5000/api/student-logs/analyze', {}, {
-                headers: { Authorization: `Bearer ${token}` }
+            const res = await api.post('/student-logs/analyze', {}, {
+                headers: { Authorization: `Bearer ${token} ` }
             });
             setAnalysis(res.data.analysis);
         } catch {

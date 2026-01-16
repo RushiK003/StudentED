@@ -26,7 +26,8 @@ const TeacherAnalytics = () => {
     const fetchAnalytics = async (clsId) => {
         try {
             const token = localStorage.getItem('token');
-            const res = await axios.get(`http://localhost:5000/api/analytics/teacher/${clsId}`, {
+            // GET analytics
+            const res = await api.get(`/analytics/teacher/${clsId}`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setData(res.data);
